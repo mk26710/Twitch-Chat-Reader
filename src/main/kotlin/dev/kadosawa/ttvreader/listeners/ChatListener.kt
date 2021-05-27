@@ -3,6 +3,8 @@ package dev.kadosawa.ttvreader.listeners
 import com.gikk.twirk.events.TwirkListener
 import com.gikk.twirk.types.twitchMessage.TwitchMessage
 import com.gikk.twirk.types.users.TwitchUser
+import dev.kadosawa.ttvreader.config.ModConfig
+import me.shedaniel.autoconfig.AutoConfig
 import net.minecraft.client.MinecraftClient
 import net.minecraft.text.Text
 
@@ -20,11 +22,20 @@ class ChatListener : TwirkListener {
         if (sender == null || message == null)
             return
 
-        val color = hex(sender.color)
-        val username = sender.userName
-        val content = message.content
+        val config = AutoConfig.getConfigHolder(ModConfig::class.java).config
+        if (config.HideTwitchChat)
+            return
 
-        val asJson = "[\"\",{\"text\":\"<\"},{\"text\":\"$username\",\"color\":\"#$color\"},{\"text\":\"> $content\"}]"
+        // This is probably the worst approach but my brain is kinda melting
+        val badges = arrayListOf<String>()
+        if (sender.isMod) badges.add("{\"text\":\"${config.badges.moderators} \",\"color\":\"${config.colors.moderators}\"},")
+        if (sender.isSub) badges.add("{\"text\":\"${config.badges.subscribers} \",\"color\":\"${config.colors.subscribers}\"},")
+
+        val color = hex(sender.color)
+        val username = "{\"text\":\"${sender.userName}\",\"color\":\"#$color\"},"
+        val content = "{\"text\":\": ${message.content}\",\"color\":\"#FFFFFF\"}"
+
+        val asJson = "[" + badges.joinToString(separator = "") + username + content + "]"
         val toSend = Text.Serializer.fromJson(asJson)
 
         chatHud.addMessage(toSend)
