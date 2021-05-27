@@ -21,6 +21,7 @@ object Store {
         twirk = null
     }
 
+    // TODO: EXCEPTION HANDLING!
     fun buildTwirk() {
         val config = AutoConfig.getConfigHolder(ModConfig::class.java).config
 
