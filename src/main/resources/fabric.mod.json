@@ -12,7 +12,7 @@
   },
   "license": "MIT",
   "icon": "assets/ttvreader/icon.png",
-  "environment": "*",
+  "environment": "client",
   "entrypoints": {
     "main": [
       "dev.kadosawa.ttvreader.TTVReaderModKt::init"
