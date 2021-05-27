@@ -24,6 +24,7 @@ object TwitchCommand {
         return 0
     }
 
+    // TODO: Handle bad channel names, incorrect credentials and other exceptions
     @Throws(CommandSyntaxException::class)
     fun connect(ctx: CommandContext<ServerCommandSource>): Int {
         Store.reset()
@@ -41,12 +42,8 @@ object TwitchCommand {
     @Suppress("UNUSED_PARAMETER")
     @Throws(CommandSyntaxException::class)
     fun disconnect(ctx: CommandContext<ServerCommandSource>): Int {
-        val message =
-            LiteralText("You have disconnected from the ${Store.channelName} chat room. \nSettings are back to initial state.")
-                .formatted(Formatting.AQUA)
         Store.reset()
-
-        chatHud.addMessage(message)
+        chatHud.addMessage(LiteralText("Reader is back to it's initial state!").formatted(Formatting.AQUA))
         return 0
     }
 }
