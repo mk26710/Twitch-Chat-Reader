@@ -39,7 +39,7 @@ dependencies {
     }
     modImplementation "io.github.prospector:modmenu:1.16.9"
 
-    implementation 'com.github.gikkman:Java-Twirk:0.6.3'
+    include 'com.github.gikkman:Java-Twirk:0.6.3'
 }
 
 processResources {
@@ -81,27 +81,6 @@ task sourcesJar(type: Jar, dependsOn: classes) {
 jar {
     from("LICENSE") {
         rename { "${it}_${project.archivesBaseName}" }
-    }
-}
-
-// configure the maven publication
-publishing {
-    publications {
-        mavenJava(MavenPublication) {
-            // add all the jars that should be included when publishing to maven
-            artifact(remapJar) {
-                builtBy remapJar
-            }
-            artifact(sourcesJar) {
-                builtBy remapSourcesJar
-            }
-        }
-    }
-
-    // select the repositories you want to publish to
-    repositories {
-        // uncomment to publish to the local maven
-        // mavenLocal()
     }
 }
 
