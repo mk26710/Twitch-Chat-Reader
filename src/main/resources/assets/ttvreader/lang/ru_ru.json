@@ -12,5 +12,7 @@
   "commands.twitch.connect.success": "Добро пожаловать в чат %s!",
   "commands.twitch.connect.started": "Подключение...",
   "commands.twitch.connect.fail": "Что-то пошло не так!",
-  "commands.twitch.reset.success": "Twitch Reader вернулся к первоначальному состоянию."
+  "commands.twitch.reset.success": "Twitch Reader вернулся к первоначальному состоянию.",
+  "commands.twitch.config.username_updated": "Ваше имя пользователя Twitch изменено на %s.",
+  "commands.twitch.config.oauth_updated": "OAuth токен обновлён."
 }

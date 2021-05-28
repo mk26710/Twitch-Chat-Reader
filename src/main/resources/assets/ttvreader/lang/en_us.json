@@ -12,5 +12,7 @@
   "commands.twitch.connect.success": "Connected to %s chat room.",
   "commands.twitch.connect.started": "Connecting...",
   "commands.twitch.connect.fail": "Something went wrong!",
-  "commands.twitch.reset.success": "Twitch Reader is back to it's initial state."
+  "commands.twitch.reset.success": "Twitch Reader is back to it's initial state.",
+  "commands.twitch.config.username_updated": "Updated your Twitch username to %s.",
+  "commands.twitch.config.oauth_updated": "Updated your OAuth token."
 }
