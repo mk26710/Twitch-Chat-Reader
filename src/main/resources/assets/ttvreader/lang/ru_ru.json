@@ -10,5 +10,7 @@
   "text.autoconfig.ttvreader.option.colors.moderators": "Модераторы",
   "text.autoconfig.ttvreader.option.colors.subscribers": "Подписчки",
   "commands.twitch.connect.success": "Добро пожаловать в чат %s!",
+  "commands.twitch.connect.started": "Подключение...",
+  "commands.twitch.connect.fail": "Что-то пошло не так!",
   "commands.twitch.reset.success": "Twitch Reader вернулся к первоначальному состоянию."
 }
