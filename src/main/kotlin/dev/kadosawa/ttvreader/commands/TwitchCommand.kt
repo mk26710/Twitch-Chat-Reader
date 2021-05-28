@@ -17,14 +17,34 @@ import net.minecraft.util.Formatting
 object TwitchCommand {
     private val chatHud = MinecraftClient.getInstance().inGameHud.chatHud
 
-    @Suppress("UNUSED_PARAMETER")
-    @Throws(CommandSyntaxException::class)
-    fun config(ctx: CommandContext<ServerCommandSource>): Int {
-        val currentScreen = MinecraftClient.getInstance().currentScreen
-        val menuScreen = AutoConfig.getConfigScreen(ModConfig::class.java, currentScreen).get()
+    object Configurator {
+        @Throws(CommandSyntaxException::class)
+        fun username(ctx: CommandContext<ServerCommandSource>): Int {
+            val input = ctx.getArgument("name", String::class.java)
 
-        MinecraftClient.getInstance().openScreen(menuScreen)
-        return 0
+            val configHolder = AutoConfig.getConfigHolder(ModConfig::class.java)
+            configHolder.config.username = input
+            configHolder.save()
+
+            val msg = TranslatableText("commands.twitch.config.username_updated", input).formatted(Formatting.YELLOW)
+            chatHud.addMessage(msg)
+
+            return 0
+        }
+
+        @Throws(CommandSyntaxException::class)
+        fun oauth(ctx: CommandContext<ServerCommandSource>): Int {
+            val input = ctx.getArgument("token", String::class.java)
+
+            val configHolder = AutoConfig.getConfigHolder(ModConfig::class.java)
+            configHolder.config.OAuthToken = "oauth:$input"
+            configHolder.save()
+
+            val msg = TranslatableText("commands.twitch.config.oauth_updated").formatted(Formatting.YELLOW)
+            chatHud.addMessage(msg)
+
+            return 0
+        }
     }
 
     @Throws(CommandSyntaxException::class)
