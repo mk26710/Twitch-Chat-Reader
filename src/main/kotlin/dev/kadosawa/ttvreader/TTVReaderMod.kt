@@ -22,10 +22,19 @@ fun init() {
 
         val configNode = CommandManager
             .literal("config")
-            .executes(TwitchCommand::config)
             .build()
 
-        val readNode = CommandManager
+        val configUsernameNode = CommandManager
+            .literal("username")
+            .then(argument("name", word()).executes(TwitchCommand.Configurator::username))
+            .build()
+
+        val configOAuthNode = CommandManager
+            .literal("oauth")
+            .then(argument("token", word()).executes(TwitchCommand.Configurator::oauth))
+            .build()
+
+        val connectNode = CommandManager
             .literal("connect")
             .then(argument("name", word()).executes(TwitchCommand::connect))
             .build()
@@ -36,8 +45,12 @@ fun init() {
             .build()
 
         dispatcher.root.addChild(twitchNode)
+
         twitchNode.addChild(configNode)
-        twitchNode.addChild(readNode)
+        configNode.addChild(configUsernameNode)
+        configNode.addChild(configOAuthNode)
+
+        twitchNode.addChild(connectNode)
         twitchNode.addChild(resetNode)
     })
 }
