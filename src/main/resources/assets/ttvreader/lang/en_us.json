@@ -1,0 +1,14 @@
+{
+  "text.autoconfig.ttvreader.title": "Twitch Chat Reader Config",
+  "text.autoconfig.ttvreader.option.HideTwitchChat": "Hide Twitch chat",
+  "text.autoconfig.ttvreader.option.username": "Your Twitch username",
+  "text.autoconfig.ttvreader.option.OAuthToken": "Your OAuth token",
+  "text.autoconfig.ttvreader.option.badges": "Customize badges",
+  "text.autoconfig.ttvreader.option.badges.moderators": "Moderators",
+  "text.autoconfig.ttvreader.option.badges.subscribers": "Subscribers",
+  "text.autoconfig.ttvreader.option.colors": "Customize badge colors",
+  "text.autoconfig.ttvreader.option.colors.moderators": "Moderators",
+  "text.autoconfig.ttvreader.option.colors.subscribers": "Subscribers",
+  "commands.twitch.connect.success": "Connected to %s chat room.",
+  "commands.twitch.reset.success": "Twitch Reader is back to it's initial state."
+}

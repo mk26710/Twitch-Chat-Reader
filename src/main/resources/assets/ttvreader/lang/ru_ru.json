@@ -1,0 +1,14 @@
+{
+  "text.autoconfig.ttvreader.title": "Конфигуратор Twitch Chat Reader",
+  "text.autoconfig.ttvreader.option.HideTwitchChat": "Спрятать сообщения из Twitch чата",
+  "text.autoconfig.ttvreader.option.username": "Ваше Twitch имя пользователя ",
+  "text.autoconfig.ttvreader.option.OAuthToken": "Ваш OAuth токен",
+  "text.autoconfig.ttvreader.option.badges": "Настройка значков",
+  "text.autoconfig.ttvreader.option.badges.moderators": "Модераторы",
+  "text.autoconfig.ttvreader.option.badges.subscribers": "Платные подписчики",
+  "text.autoconfig.ttvreader.option.colors": "Настройка цветов для значков",
+  "text.autoconfig.ttvreader.option.colors.moderators": "Модераторы",
+  "text.autoconfig.ttvreader.option.colors.subscribers": "Подписчки",
+  "commands.twitch.connect.success": "Добро пожаловать в чат %s!",
+  "commands.twitch.reset.success": "Twitch Reader вернулся к первоначальному состоянию."
+}
