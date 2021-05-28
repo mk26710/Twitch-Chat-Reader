@@ -3,10 +3,7 @@ package dev.kadosawa.ttvreader.commands
 import com.mojang.brigadier.context.CommandContext
 import com.mojang.brigadier.exceptions.CommandSyntaxException
 import dev.kadosawa.ttvreader.config.ModConfig
-import dev.kadosawa.ttvreader.data.Store
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
+import dev.kadosawa.ttvreader.store.RealStore
 import me.shedaniel.autoconfig.AutoConfig
 import net.minecraft.client.MinecraftClient
 import net.minecraft.server.command.ServerCommandSource
@@ -50,11 +47,11 @@ object TwitchCommand {
     @Throws(CommandSyntaxException::class)
     fun connect(ctx: CommandContext<ServerCommandSource>): Int {
         // Before creating a new connection gotta close existing ones
-        Store.reset()
+        RealStore.initialState()
 
         // Keep requested name in the store
         val newChannelName = ctx.getArgument("name", String::class.java)
-        Store.channelName = newChannelName
+        RealStore.setChannelName(newChannelName)
 
         // Prepare text messages
         val textStarted = TranslatableText("commands.twitch.connect.started").formatted(Formatting.YELLOW)
@@ -62,26 +59,31 @@ object TwitchCommand {
         val textSuccess =
             TranslatableText("commands.twitch.connect.success", newChannelName).formatted(Formatting.YELLOW)
 
-        // Once again, we need a coroutine scope
-        CoroutineScope(Dispatchers.IO).launch {
-            chatHud.addMessage(textStarted)
+        chatHud.addMessage(textStarted)
 
-            when (Store.buildTwirk()) {
-                true -> {
-                    chatHud.addMessage(textSuccess)
-                }
-                else -> {
-                    chatHud.addMessage(textFailure)
+        RealStore.createTwirkConnection()
+            .thenApplyAsync {
+                println("We are in the 90's")
+
+                when (it) {
+                    true -> {
+                        chatHud.addMessage(textSuccess)
+                        println("We are in successful 90's")
+                    }
+                    else -> {
+                        chatHud.addMessage(textFailure)
+                        println("We are in failing 90's")
+                    }
                 }
             }
-        }
+
         return 0
     }
 
     @Suppress("UNUSED_PARAMETER")
     @Throws(CommandSyntaxException::class)
     fun disconnect(ctx: CommandContext<ServerCommandSource>): Int {
-        Store.reset()
+        RealStore.initialState()
         chatHud.addMessage(TranslatableText("commands.twitch.reset.success").formatted(Formatting.YELLOW))
         return 0
     }
