@@ -63,16 +63,16 @@ object TwitchCommand {
 
         RealStore.createTwirkConnection()
             .thenApplyAsync {
-                println("We are in the 90's")
+                RealStore.LOGGER.info("We are in the 90's")
 
                 when (it) {
                     true -> {
                         chatHud.addMessage(textSuccess)
-                        println("We are in successful 90's")
+                        RealStore.LOGGER.info("We are in successful 90's")
                     }
                     else -> {
                         chatHud.addMessage(textFailure)
-                        println("We are in failing 90's")
+                        RealStore.LOGGER.info("We are in failing 90's")
                     }
                 }
             }
