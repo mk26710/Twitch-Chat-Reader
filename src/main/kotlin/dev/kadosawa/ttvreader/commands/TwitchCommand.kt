@@ -7,7 +7,7 @@ import dev.kadosawa.ttvreader.data.Store
 import me.shedaniel.autoconfig.AutoConfig
 import net.minecraft.client.MinecraftClient
 import net.minecraft.server.command.ServerCommandSource
-import net.minecraft.text.LiteralText
+import net.minecraft.text.TranslatableText
 import net.minecraft.util.Formatting
 
 
@@ -32,7 +32,7 @@ object TwitchCommand {
         val newChannelName = ctx.getArgument("name", String::class.java)
         Store.channelName = newChannelName
 
-        val message = LiteralText("Connected to ${Store.channelName} chat room.").formatted(Formatting.AQUA)
+        val message = TranslatableText("commands.twitch.connect.success", Store.channelName).formatted(Formatting.AQUA)
         chatHud.addMessage(message)
 
         Store.buildTwirk()
@@ -43,7 +43,7 @@ object TwitchCommand {
     @Throws(CommandSyntaxException::class)
     fun disconnect(ctx: CommandContext<ServerCommandSource>): Int {
         Store.reset()
-        chatHud.addMessage(LiteralText("Reader is back to it's initial state!").formatted(Formatting.AQUA))
+        chatHud.addMessage(TranslatableText("commands.twitch.reset.success").formatted(Formatting.AQUA))
         return 0
     }
 }

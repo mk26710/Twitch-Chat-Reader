@@ -3,12 +3,12 @@
   "id": "ttvreader",
   "version": "${version}",
   "name": "Twitch Chat Reader",
-  "description": "Twitch Chat but in the game",
+  "description": "Twitch Chat but in the game\n\nNote: you can use https://twitchapps.com/tmi/ to obtain your OAuth token, this website is mentioned in official Twitch Developers documentation.",
   "authors": [
     "kadosawa"
   ],
   "contact": {
-    "sources": "https://github.com/howaitoreivun/Twitch-Chat-Reader-Kotlin"
+    "sources": "https://github.com/howaitoreivun/Twitch-Chat-Reader"
   },
   "license": "MIT",
   "icon": "assets/ttvreader/icon.png",
