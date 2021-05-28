@@ -5,6 +5,8 @@ import com.gikk.twirk.TwirkBuilder;
 import dev.kadosawa.ttvreader.config.ModConfig;
 import dev.kadosawa.ttvreader.listeners.ChatListener;
 import me.shedaniel.autoconfig.AutoConfig;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -13,6 +15,8 @@ import java.util.concurrent.CompletableFuture;
 
 @SuppressWarnings("unused")
 public class RealStore {
+    public final static Logger LOGGER = LogManager.getLogger();
+
     @Nullable
     private static String channelName = null;
 
@@ -42,7 +46,7 @@ public class RealStore {
 
     public static CompletableFuture<Boolean> createTwirkConnection() {
         return CompletableFuture.supplyAsync(() -> {
-            System.out.println("Running in the 90's");
+            LOGGER.info("Running in the 90's");
 
             ModConfig config = AutoConfig.getConfigHolder(ModConfig.class).getConfig();
 
