@@ -4,9 +4,8 @@ import com.gikk.twirk.Twirk
 import com.gikk.twirk.TwirkBuilder
 import dev.kadosawa.ttvreader.config.ModConfig
 import dev.kadosawa.ttvreader.listeners.ChatListener
-import kotlinx.coroutines.*
+import kotlinx.coroutines.Runnable
 import me.shedaniel.autoconfig.AutoConfig
-import kotlin.Exception
 import kotlin.coroutines.resume
 import kotlin.coroutines.resumeWithException
 import kotlin.coroutines.suspendCoroutine
