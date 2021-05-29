@@ -25,6 +25,6 @@ public class ModConfig implements ConfigData {
 
     public static class Colors {
         public String moderators = "#00AD03";
-        public String subscribers = "red";
+        public String subscribers = "#eb4745";
     }
 }
