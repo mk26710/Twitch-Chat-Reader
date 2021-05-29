@@ -12,9 +12,12 @@ import org.jetbrains.annotations.Nullable;
 
 import java.io.IOException;
 import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 @SuppressWarnings("unused")
 public class RealStore {
+    private static final ExecutorService executor = Executors.newFixedThreadPool(1);
     public final static Logger LOGGER = LogManager.getLogger();
 
     @Nullable
@@ -45,19 +48,21 @@ public class RealStore {
     }
 
     public static CompletableFuture<Boolean> createTwirkConnection() {
-        return CompletableFuture.supplyAsync(() -> {
-            LOGGER.info("Running in the 90's");
+        return CompletableFuture
+                .supplyAsync(() -> {
+                    LOGGER.debug("Trying to connect to Twitch...");
 
-            ModConfig config = AutoConfig.getConfigHolder(ModConfig.class).getConfig();
+                    ModConfig config = AutoConfig.getConfigHolder(ModConfig.class).getConfig();
 
-            twirk = new TwirkBuilder(channelName, config.username, config.OAuthToken).build();
-            twirk.addIrcListener(new ChatListener());
+                    twirk = new TwirkBuilder(channelName, config.username, config.OAuthToken).build();
+                    twirk.addIrcListener(new ChatListener());
 
-            try {
-                return twirk.connect();
-            } catch (IOException | InterruptedException e) {
-                return false;
-            }
-        });
+                    try {
+                        return twirk.connect();
+                    } catch (IOException | InterruptedException e) {
+                        initialState();
+                        return false;
+                    }
+                }, executor);
     }
 }
