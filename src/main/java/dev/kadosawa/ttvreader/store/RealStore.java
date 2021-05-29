@@ -3,7 +3,7 @@ package dev.kadosawa.ttvreader.store;
 import com.gikk.twirk.Twirk;
 import com.gikk.twirk.TwirkBuilder;
 import dev.kadosawa.ttvreader.config.ModConfig;
-import dev.kadosawa.ttvreader.listeners.ChatListener;
+import dev.kadosawa.ttvreader.listeners.TwitchChatListener;
 import me.shedaniel.autoconfig.AutoConfig;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -55,7 +55,7 @@ public class RealStore {
                     ModConfig config = AutoConfig.getConfigHolder(ModConfig.class).getConfig();
 
                     twirk = new TwirkBuilder(channelName, config.username, config.OAuthToken).build();
-                    twirk.addIrcListener(new ChatListener());
+                    twirk.addIrcListener(new TwitchChatListener());
 
                     try {
                         return twirk.connect();
